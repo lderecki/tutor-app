@@ -16,9 +16,8 @@ public class TutorDAO {
     private EntityManager entityManager;
 
     public List<Tutor> findAll() {
-        String queryString = "select t from Tutor t";  // join t.availabilityTimeList join t.subjectList
+        String queryString = "select t from Tutor t join fetch t.availabilityTimeList join fetch t.subjectList";
         Query query = entityManager.createQuery(queryString);
-
         return query.getResultList();
     }
 }
