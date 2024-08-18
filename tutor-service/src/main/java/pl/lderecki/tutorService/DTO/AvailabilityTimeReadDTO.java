@@ -14,15 +14,6 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 public class AvailabilityTimeReadDTO {
 
-    public AvailabilityTimeReadDTO(AvailabilityTime availabilityTime) {
-        this.id = availabilityTime.getId();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        this.dateTimeFrom = formatter.format(availabilityTime.getDateTimeFrom());
-        this.dateTimeTo = formatter.format(availabilityTime.getDateTimeTo());
-        this.tutorId = availabilityTime.getTutor().getId();
-
-    }
-
     private Long id;
 
     private String dateTimeFrom;
@@ -30,4 +21,13 @@ public class AvailabilityTimeReadDTO {
     private String dateTimeTo;
 
     private Long tutorId;
+
+    public AvailabilityTimeReadDTO(AvailabilityTime availabilityTime, DateTimeFormatter formatter) {
+        this.id = availabilityTime.getId();
+        this.dateTimeFrom = formatter.format(availabilityTime.getDateTimeFrom());
+        this.dateTimeTo = formatter.format(availabilityTime.getDateTimeTo());
+        this.tutorId = availabilityTime.getTutor().getId();
+    }
+
+
 }

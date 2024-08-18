@@ -1,23 +1,14 @@
 package pl.lderecki.tutorService.DAO;
 
-import org.springframework.stereotype.Repository;
+import pl.lderecki.tutorService.DTO.TutorSearchDTO;
 import pl.lderecki.tutorService.model.Tutor;
 
-import javax.persistence.EntityManager;
-
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
+import java.util.Set;
 
-@Repository
-public class TutorDAO {
+public interface TutorDAO {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    List<Tutor> findAll();
 
-    public List<Tutor> findAll() {
-        String queryString = "select t from Tutor t join fetch t.availabilityTimeList join fetch t.subjectList";
-        Query query = entityManager.createQuery(queryString);
-        return query.getResultList();
-    }
+    Set<Tutor> findByCriteria(TutorSearchDTO criteria);
 }
