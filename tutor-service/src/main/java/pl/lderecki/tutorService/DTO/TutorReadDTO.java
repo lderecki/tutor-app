@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.lderecki.tutorService.model.Tutor;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class TutorReadDTO {
 
-    public TutorReadDTO(Tutor tutor) {
+    public TutorReadDTO(Tutor tutor, DateTimeFormatter formatter) {
         this.id = tutor.getId();
         this.firstName = tutor.getFirstName();
         this.lastName = tutor.getLastName();
@@ -24,7 +25,7 @@ public class TutorReadDTO {
         this.password = tutor.getPassword();
         this.availabilityTimeList = tutor.getAvailabilityTimeList()
                 .stream()
-                .map(AvailabilityTimeReadDTO::new)
+                .map(a -> new AvailabilityTimeReadDTO(a, formatter))
                 .collect(Collectors.toList());
 
         this.subjectList = tutor.getSubjectList()
